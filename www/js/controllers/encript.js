@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('encripCtrl', function ($scope, $stateParams, $ionicModal, router, wirings, wiringsReflec, reflector) {
+app.controller('encripCtrl', function ($scope, $stateParams, $ionicModal, router, wirings, wiringsReflec, reflector, $cordovaClipboard) {
 
   //Definicion de los data-binding usados
   $scope.data = {
@@ -75,6 +75,15 @@ app.controller('encripCtrl', function ($scope, $stateParams, $ionicModal, router
 
 
     return letter;
+  }
+
+  $scope.copy = function(){
+    $cordovaClipboard.copy($scope.data.messageOutput)
+    .then(function () {
+      alert("texto Copiado")
+    }, function () {
+      // error
+    });
   }
 
 
