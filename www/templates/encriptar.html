@@ -1,0 +1,47 @@
+<ion-view view-title="Encriptar">
+   <ion-content scroll="false">
+	   <div class="card">
+	   	 	<div class="item item-divider">
+			    Routers : {{data.routerPosition1 +"  "+ data.routerPosition2 +"  "+ data.routerPosition3}}
+	   	 		<button class="button button-small button-calm pref copy" ng-disabled="!data.messageOutput"> 
+			    	<i class="icon ion-backspace"></i>
+			    </button>
+				<button class="button button-small button-calm pref" ng-click="modal.show()"> 
+			    	<i class="ion-gear-b"></i>
+			    </button>
+			</div>
+		</div>
+    	<div class="card">
+	   	 	<div class="item item-divider">
+	   	 		Encriptar
+	   	 		<button class="button button-small button-calm pref clean" ng-disabled="!data.messageOutput"> 
+			    	<i class="icon ion-backspace"></i>
+			    </button>
+	   	 		<button class="button button-small button-calm pref copy" ng-disabled="!data.messageOutput"> 
+			    	<i class="icon ion-clipboard"></i>
+			    </button>
+				<button class="button button-small button-calm pref" ng-disabled="!data.messageOutput"> 
+			    	<i class="icon ion-android-share-alt"></i>
+			    </button>
+			</div>
+			<div class="item item-text-wrap">
+				{{data.messageOutput}}
+			</div>
+		</div>
+      	<form name="encryptForm" ng-submit="read()" novalidate>
+          <ion-footer-bar class="bar-stable item-input-inset message-footer" keyboard-attach>
+              <label class="item-input-wrapper">
+                  	<textarea ng-model="data.message" value=""
+                  		placeholder="Encripta tu mensaje..." only-alpha minlength="1" required>
+                  	</textarea>
+              </label>
+              <div class="footer-btn-wrap">
+                <button class="button button-icon icon ion-android-send footer-btn" type="submit"
+                    ng-disabled="!data.message || data.message === ''">
+                </button>
+              </div>
+          </ion-footer-bar>
+      </form>
+
+   </ion-content>
+</ion-view>
