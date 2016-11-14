@@ -4,11 +4,12 @@ app.factory('router', function () {
    //Declaracion de la clase router  
   //router(registro seleccionado, numero de router, posicion inicial del contador)
   function router(regSelect,position){
-      this.regInput= regSelect;
+      this.regSelect=angular.copy(regSelect);
+      this.regInput= angular.copy(regSelect);
       this.jsonOut={};
       this.abc=['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
       this.abcStatic= ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
-      this.position=position;
+      this.position=angular.copy(position);
       this.signalOut=false;
 
       //Colocamos el router en la posicion definida por el usuario
@@ -122,6 +123,19 @@ app.factory('router', function () {
 
       //Retorno
       return this.jsonOut;
+  };
+
+
+  router.prototype.restart = function() {
+    this.abc=['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+    this.regInput= this.regSelect;  
+    this.position= 0;
+
+    return this.abc[0];
+  };
+
+  router.prototype.positionCurrent = function() {
+    return this.abc[0];
   };
   /**
    * Return the constructor function

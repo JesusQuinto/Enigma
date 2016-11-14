@@ -3,7 +3,7 @@
 	   <div class="card">
 	   	 	<div class="item item-divider">
 			    Routers : {{data.routerPosition1 +"  "+ data.routerPosition2 +"  "+ data.routerPosition3}}
-	   	 		<button class="button button-small button-calm pref copy" ng-disabled="!data.messageOutput"> 
+	   	 		<button class="button button-small button-calm pref copy" ng-click="cleanR()"> 
 			    	<i class="icon ion-backspace"></i>
 			    </button>
 				<button class="button button-small button-calm pref" ng-click="modal.show()"> 
@@ -14,7 +14,7 @@
     	<div class="card">
 	   	 	<div class="item item-divider">
 	   	 		Encriptar
-	   	 		<button class="button button-small button-calm pref clean" ng-disabled="!data.messageOutput"> 
+	   	 		<button class="button button-small button-calm pref clean" ng-disabled="!data.messageOutput" ng-click="cleanOutput()"> 
 			    	<i class="icon ion-backspace"></i>
 			    </button>
 	   	 		<button class="button button-small button-calm pref copy" ng-disabled="!data.messageOutput" ng-click="copy()"> 
@@ -25,7 +25,9 @@
 			    </button>
 			</div>
 			<div class="item item-text-wrap">
-				{{data.messageOutput}}
+				<textarea class="outTexarea" ng-model="data.messageOutput" 
+					ng-bind="data.messageOutput">
+				</textarea>
 			</div>
 		</div>
       	<form name="encryptForm" ng-submit="read()" novalidate>

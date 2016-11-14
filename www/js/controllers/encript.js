@@ -78,12 +78,22 @@ app.controller('encripCtrl', function ($scope, $stateParams, $ionicModal, router
   }
 
   $scope.copy = function(){
-    $cordovaClipboard.copy($scope.data.messageOutput)
+    $cordovaClipboard.copy("palabras")
     .then(function () {
       alert("texto Copiado")
     }, function () {
       // error
     });
+  }
+
+  $scope.cleanOutput = function(){
+    $scope.data.messageOutput="";
+  }
+
+  $scope.cleanR = function(){
+    $scope.data.routerPosition1 = router1.restart();
+    $scope.data.routerPosition2 = router2.restart();
+    $scope.data.routerPosition3 = router3.restart();
   }
 
 
@@ -100,7 +110,7 @@ app.controller('encripCtrl', function ($scope, $stateParams, $ionicModal, router
       messageOutput = messageOutput.concat(encryptLetter(message[i]));
     }
 
-    $scope.data.messageOutput= messageOutput;
+    $scope.data.messageOutput= angular.copy(messageOutput);
     $scope.data.message = "";
   }
 });

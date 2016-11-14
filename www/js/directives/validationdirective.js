@@ -7,7 +7,7 @@ app.directive('onlyAlpha', function () {
       link: function (scope, element, attr, ctrl) {
         function inputValue(val) {
           if (val) {
-            var alpha = val.replace(/[^a-zA-ZñÑ ]/g, '');
+            var alpha = val.replace(/[^a-zA-Z]/g, '');
 
             if (alpha !== val) {
               ctrl.$setViewValue(alpha);
