@@ -128,7 +128,7 @@ app.factory('router', function () {
 
   router.prototype.restart = function() {
     this.abc=['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
-    this.regInput= this.regSelect;  
+    this.regInput= angular.copy(this.regSelect);  
     this.position= 0;
 
     return this.abc[0];
@@ -137,6 +137,24 @@ app.factory('router', function () {
   router.prototype.positionCurrent = function() {
     return this.abc[0];
   };
+
+  router.prototype.move = function(newposition) {
+   
+    // convierte la entrada  "A" -> 0, "B" -> 1, ... "Z" -> 25
+    this.position = angular.copy(newposition.charCodeAt() - "A".charCodeAt());
+    this.abc=['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+    this.regInput= angular.copy(this.regSelect); 
+    
+    //Colocamos el router en la posicion definida por el usuario
+    for (var i = 0; i < this.position; i++) {
+      this.abc.push(this.abc.shift());
+      this.regInput.push(this.regInput.shift());
+    }
+
+    return this.abc[0];
+  };
+
+
   /**
    * Return the constructor function
    */

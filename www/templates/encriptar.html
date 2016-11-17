@@ -2,18 +2,33 @@
    <ion-content scroll="false">
 	   <div class="card">
 	   	 	<div class="item item-divider">
-			    Routers : {{data.routerPosition1 +"  "+ data.routerPosition2 +"  "+ data.routerPosition3}}
-	   	 		<button class="button button-small button-calm pref copy" ng-click="cleanR()"> 
+
+	   	 		Routers:
+
+				<select ng-model="data.routers[0].position" ng-change="moveRouter(0,data.routers[0].position)" 
+					ng-options="letter for letter in data.abc">
+				</select>
+				
+				<select ng-model="data.routers[1].position" ng-change="moveRouter(1,data.routers[1].position)" 
+					ng-options="letter for letter in data.abc">
+				</select>
+				
+				<select ng-model="data.routers[2].position" ng-change="moveRouter(2,data.routers[2].position)" 
+					ng-options="letter for letter in data.abc">
+				</select>
+
+			    <button class="button button-small button-calm pref copy" ng-click="restartRouters()"> 
 			    	<i class="icon ion-backspace"></i>
 			    </button>
 				<button class="button button-small button-calm pref" ng-click="modal.show()"> 
 			    	<i class="ion-gear-b"></i>
 			    </button>
 			</div>
+
 		</div>
     	<div class="card">
 	   	 	<div class="item item-divider">
-	   	 		Encriptar
+	   	 		Salida
 	   	 		<button class="button button-small button-calm pref clean" ng-disabled="!data.messageOutput" ng-click="cleanOutput()"> 
 			    	<i class="icon ion-backspace"></i>
 			    </button>
@@ -24,11 +39,7 @@
 			    	<i class="icon ion-android-share-alt"></i>
 			    </button>
 			</div>
-			<div class="item item-text-wrap">
-				<textarea class="outTexarea" ng-model="data.messageOutput" 
-					ng-bind="data.messageOutput">
-				</textarea>
-			</div>
+			<div class="item item-text-wrap" ng-bind="data.messageOutput"></div>
 		</div>
       	<form name="encryptForm" ng-submit="read()" novalidate>
           <ion-footer-bar class="bar-stable item-input-inset message-footer" keyboard-attach>
