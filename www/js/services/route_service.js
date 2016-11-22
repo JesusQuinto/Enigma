@@ -14,8 +14,8 @@ app.factory('router', function () {
 
       //Colocamos el router en la posicion definida por el usuario
       for (var i = 0; i < this.position; i++) {
-          this.abc.push(this.abc.shift());
-          this.regInput.push(this.regInput.shift());
+        this.abc.push(this.abc.shift());
+        this.regInput.push(this.regInput.shift());
       }
   }
 
