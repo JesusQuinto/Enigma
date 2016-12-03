@@ -106,7 +106,7 @@ app.controller('encripCtrl', function ($scope, $stateParams, $ionicModal, $timeo
     .then(function(result) {
       // Success!
     }, function(err) {
-      // An error occured. Show a message to the user
+      // error
     });
   }
 
