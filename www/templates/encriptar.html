@@ -4,15 +4,12 @@
 	   	 	<div class="item item-divider">
 
 	   	 		Routers:
-
 				<select ng-model="data.routers[0].position" ng-change="moveRouter(0,data.routers[0].position)" 
 					ng-options="letter for letter in data.abc">
 				</select>
-				
 				<select ng-model="data.routers[1].position" ng-change="moveRouter(1,data.routers[1].position)" 
 					ng-options="letter for letter in data.abc">
 				</select>
-				
 				<select ng-model="data.routers[2].position" ng-change="moveRouter(2,data.routers[2].position)" 
 					ng-options="letter for letter in data.abc">
 				</select>
@@ -39,22 +36,32 @@
 			    	<i class="icon ion-android-share-alt"></i>
 			    </button>
 			</div>
-			<div class="item item-text-wrap" ng-bind="data.messageOutput"></div>
+			<div class="item item-text-wrap output" ng-bind="data.messageOutput"></div>
 		</div>
-      	<form name="encryptForm" ng-submit="read()" novalidate>
-          <ion-footer-bar class="bar-stable item-input-inset message-footer" keyboard-attach>
-              <label class="item-input-wrapper">
-                  	<textarea ng-model="data.message" value=""
-                  		placeholder="Encripta tu mensaje..." only-alpha minlength="1" required>
-                  	</textarea>
-              </label>
-              <div class="footer-btn-wrap">
-                <button class="button button-icon icon ion-android-send footer-btn" type="submit"
-                    ng-disabled="!data.message || data.message === ''">
-                </button>
-              </div>
-          </ion-footer-bar>
-      </form>
-
+		<div ng-if="data.quick == 'true'">
+			<form name="encryptForm" ng-submit="read()" novalidate>
+	          <ion-footer-bar class="bar-stable item-input-inset message-footer" keyboard-attach>
+	              <label class="item-input-wrapper">
+	                  	<textarea ng-model="data.message" value=""
+	                  		placeholder="Encripta tu mensaje..." only-alpha minlength="1" required>
+	                  	</textarea>
+	              </label>
+	              <div class="footer-btn-wrap">
+	                <button class="button button-icon icon ion-android-send footer-btn" type="submit"
+	                    ng-disabled="!data.message || data.message === ''">
+	                </button>
+	              </div>
+	          </ion-footer-bar>
+	        </form>
+		</div>
+		<div ng-if="data.quick == 'false'">
+	        <ion-footer-bar class="bar-stable item-input-inset message-footer" keyboard-attach>
+	            <label class="item-input-wrapper">
+	                <textarea ng-model="data.message" ng-change="autoRead()" value=""
+	                  	placeholder="Encripta tu mensaje en tiempo real..." only-alpha minlength="1" required>
+	                </textarea>
+	            </label>
+	        </ion-footer-bar>
+		</div>
    </ion-content>
 </ion-view>

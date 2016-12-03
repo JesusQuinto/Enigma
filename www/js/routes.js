@@ -18,7 +18,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
     })
     .state('tab.encrip', {
       cache: false,
-      url: "encrip/:speed",
+      url: "encrip/quick=:quick",
       views:{
         "inicio":{
           templateUrl: "templates/encriptar.html",

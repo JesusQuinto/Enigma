@@ -1,9 +1,24 @@
 'use strict';
 
-app.controller('encripCtrl', function ($scope, $stateParams, $ionicModal, $timeout, router, wirings, wiringsReflec, reflector, $cordovaClipboard, $cordovaToast, $cordovaSocialSharing) {
+app.controller('encripCtrl', 
+  function
+    (
+      $scope, 
+      $stateParams, 
+      $ionicModal, 
+      router, 
+      wirings, 
+      wiringsReflec, 
+      reflector, 
+      $cordovaClipboard, 
+      $cordovaToast, 
+      $cordovaSocialSharing
+    ) 
+  {
 
   //Definicion de los data-binding usados
   $scope.data = {
+    'quick':$stateParams.quick,
     'message' : '',
     'messageOutput':'',
     'abc': ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'],
@@ -25,6 +40,35 @@ app.controller('encripCtrl', function ($scope, $stateParams, $ionicModal, $timeo
   //Instanciamos a un objeto reflector
   //router(registro a usar)
   var reflector = new reflector(wiringsReflec[0]);
+
+  //main
+  $scope.read = function(){
+    var message = $scope.data.message
+    var messageOutput="";
+
+    //Colocando las letras en Mayuscula
+    message =message.toUpperCase();
+
+    for (var i = 0; i < message.length; i++) {
+      messageOutput = messageOutput.concat(encryptLetter(message[i]));
+    }
+
+    $scope.data.messageOutput= angular.copy(messageOutput);
+    $scope.data.message = "";
+  }
+
+  //main from Inicio Clasico
+  $scope.autoRead = function(){
+    var message = $scope.data.message;
+    var messageOutput;
+
+    //Colocando las letras en Mayuscula
+    message =message.toUpperCase();
+    messageOutput = encryptLetter(message);
+    
+    $scope.data.messageOutput= $scope.data.messageOutput.concat(messageOutput);
+    $scope.data.message = "";
+  }
 
   function encryptLetter(letter) {
     letter = inside(letter);
@@ -118,21 +162,6 @@ app.controller('encripCtrl', function ($scope, $stateParams, $ionicModal, $timeo
     $scope.data.routers[0].position = router[0].obj.restart();
     $scope.data.routers[1].position = router[1].obj.restart();
     $scope.data.routers[2].position = router[2].obj.restart();
-  }
-
-  $scope.read = function(){
-    var message = $scope.data.message
-    var messageOutput="";
-
-    //Colocando las letras en Mayuscula
-    message =message.toUpperCase();
-
-    for (var i = 0; i < message.length; i++) {
-      messageOutput = messageOutput.concat(encryptLetter(message[i]));
-    }
-
-    $scope.data.messageOutput= angular.copy(messageOutput);
-    $scope.data.message = "";
   }
 
   $scope.moveRouter = function(routerSelect,newPosition) {
