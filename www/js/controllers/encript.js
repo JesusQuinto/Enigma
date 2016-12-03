@@ -8,23 +8,19 @@ app.controller('encripCtrl', function ($scope, $stateParams, $ionicModal, $timeo
     'messageOutput':'',
     'abc': ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'],
     'routers': [
-      {
-        'obj': new router(wirings[1],0),
-        'position':'A'
-      },
-      {
-        'obj': new router(wirings[2],0),
-        'position':'A'
-      },
-      {
-        'obj': new router(wirings[3],0),
-        'position':'A'
-      }
+      {'position':'A'},
+      {'position':'A'},
+      {'position':'A'}
     ]
   };
 
-  //Instanciamos a un objeto router
-  //router(registro a usar, numero de router, la posicion de partida)
+  //Instanciamos a los objetos router
+  //router(registro a usar, la posicion de partida)
+  var router = [
+    {'obj':new router(wirings[1],0)},
+    {'obj':new router(wirings[2],0)},
+    {'obj':new router(wirings[3],0)}
+  ];
 
   //Instanciamos a un objeto reflector
   //router(registro a usar)
@@ -44,30 +40,22 @@ app.controller('encripCtrl', function ($scope, $stateParams, $ionicModal, $timeo
     var objectInside3;
 
     //------------------  router 1 ------------------------
-    objectInside1 = $scope.data.routers[0].obj.encryptInside(letter,true);
-    console.log(objectInside1.abcCurrent[0]);
+    objectInside1 = router[0].obj.encryptInside(letter,true);
     $scope.data.routers[0].position = objectInside1.abcCurrent[0];
     letter = objectInside1.out;
     signal = objectInside1.signalOut;
-    console.log(objectInside1.signalOut);
     
     //------------------  router 2 ------------------------
-    objectInside2 = $scope.data.routers[1].obj.encryptInside(letter,signal);
-    console.log(objectInside2.abcCurrent[0]);
+    objectInside2 = router[1].obj.encryptInside(letter,signal);
     $scope.data.routers[1].position = objectInside2.abcCurrent[0];
     letter = objectInside2.out;
     signal = objectInside2.signalOut;
-    console.log(objectInside2.signalOut);
-
+    
     //------------------  router 3 ------------------------
-    objectInside3 = $scope.data.routers[2].obj.encryptInside(letter,signal);
-    console.log(objectInside3.abcCurrent[0]);
+    objectInside3 = router[2].obj.encryptInside(letter,signal);
     $scope.data.routers[2].position = objectInside3.abcCurrent[0];
     letter = objectInside3.out;
-    console.log(objectInside3.signalOut);
 
-
-    console.log("------------------------------------------------------------------")
     return letter;
   }
 
@@ -77,13 +65,13 @@ app.controller('encripCtrl', function ($scope, $stateParams, $ionicModal, $timeo
     var objectOutside3;
 
     //------------------  router 3 ------------------------
-    objectOutside3 =  $scope.data.routers[2].obj.encryptOutside(letter);
+    objectOutside3 = router[2].obj.encryptOutside(letter);
     letter = objectOutside3.out;
     //------------------  router 2 ------------------------
-    objectOutside2 =  $scope.data.routers[1].obj.encryptOutside(letter);
+    objectOutside2 = router[1].obj.encryptOutside(letter);
     letter = objectOutside2.out;    
     //------------------  router 1 ------------------------
-    objectOutside1 =  $scope.data.routers[0].obj.encryptOutside(letter);
+    objectOutside1 = router[0].obj.encryptOutside(letter);
     letter = objectOutside1.out;
 
     return letter;
@@ -127,9 +115,9 @@ app.controller('encripCtrl', function ($scope, $stateParams, $ionicModal, $timeo
   }
 
   $scope.restartRouters = function(){
-    $scope.data.routers[0].position = $scope.data.routers[0].obj.restart();
-    $scope.data.routers[1].position = $scope.data.routers[1].obj.restart();
-    $scope.data.routers[2].position = $scope.data.routers[2].obj.restart();
+    $scope.data.routers[0].position = router[0].obj.restart();
+    $scope.data.routers[1].position = router[1].obj.restart();
+    $scope.data.routers[2].position = router[2].obj.restart();
   }
 
   $scope.read = function(){
@@ -148,7 +136,7 @@ app.controller('encripCtrl', function ($scope, $stateParams, $ionicModal, $timeo
   }
 
   $scope.moveRouter = function(routerSelect,newPosition) {
-    $scope.data.routers[routerSelect].position = $scope.data.routers[routerSelect].obj.move(newPosition);
+    $scope.data.routers[routerSelect].position = router[routerSelect].obj.move(newPosition);
   }
 
 });

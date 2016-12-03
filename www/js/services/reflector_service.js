@@ -4,7 +4,7 @@ app.factory('reflector', function () {
    //Declaracion de la clase reflector  
   //reflector(registro seleccionado)
   function reflector(regSelect){
-    this.regSelect= regSelect;
+    this.regSelect= angular.copy(regSelect);
   }
 
   reflector.prototype.transf = function(input){

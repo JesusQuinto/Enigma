@@ -24,6 +24,9 @@ app.factory('router', function () {
   //signal = señal que indica si el router anterior giro 25 veces
   router.prototype.encryptInside = function(input,signal){
 
+      //reset signalOut 
+      this.signalOut=false;
+
       //Si el numero de router es igual a 0 itera, de lo contrario iterta si la señal es verdadera
       if(signal == true){
 
@@ -46,7 +49,6 @@ app.factory('router', function () {
             this.signalOut=true;
             this.position=0;
           }
-          else this.signalOut=false;
       }
 
       /*  ---charCodeAt---
