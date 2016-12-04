@@ -2,14 +2,16 @@
    <ion-content scroll="false">
 	   <div class="card">
 	   	 	<div class="item item-divider">
-
-	   	 		Routers:
+	   	 		<label class="routers">Routers:</label>
+	   	 		<label>1)</label>
 				<select ng-model="data.routers[0].position" ng-change="moveRouter(0,data.routers[0].position)" 
 					ng-options="letter for letter in data.abc">
 				</select>
+				<label>2)</label>
 				<select ng-model="data.routers[1].position" ng-change="moveRouter(1,data.routers[1].position)" 
 					ng-options="letter for letter in data.abc">
 				</select>
+				<label>3)</label>
 				<select ng-model="data.routers[2].position" ng-change="moveRouter(2,data.routers[2].position)" 
 					ng-options="letter for letter in data.abc">
 				</select>
@@ -17,15 +19,14 @@
 			    <button class="button button-small button-calm pref copy" ng-click="restartRouters()"> 
 			    	<i class="icon ion-backspace"></i>
 			    </button>
-				<button class="button button-small button-calm pref" ng-click="modal.show()"> 
+				<button class="button button-small button-calm pref" ui-sref="tab.preferences"> 
 			    	<i class="ion-gear-b"></i>
 			    </button>
 			</div>
-
 		</div>
     	<div class="card">
 	   	 	<div class="item item-divider">
-	   	 		Salida
+	   	 		<label>Salida</label>
 	   	 		<button class="button button-small button-calm pref clean" ng-disabled="!data.messageOutput" ng-click="cleanOutput()"> 
 			    	<i class="icon ion-backspace"></i>
 			    </button>
@@ -43,7 +44,7 @@
 	          <ion-footer-bar class="bar-stable item-input-inset message-footer" keyboard-attach>
 	              <label class="item-input-wrapper">
 	                  	<textarea ng-model="data.message" value=""
-	                  		placeholder="Encripta tu mensaje..." only-alpha minlength="1" required>
+	                  		placeholder="Encripta tu mensaje..." only-alpha capitalize minlength="1" required>
 	                  	</textarea>
 	              </label>
 	              <div class="footer-btn-wrap">
@@ -58,7 +59,7 @@
 	        <ion-footer-bar class="bar-stable item-input-inset message-footer" keyboard-attach>
 	            <label class="item-input-wrapper">
 	                <textarea ng-model="data.message" ng-change="autoRead()" value=""
-	                  	placeholder="Encripta tu mensaje en tiempo real..." only-alpha minlength="1" required>
+	                  	placeholder="Encripta tu mensaje en tiempo real..." only-alpha capitalize minlength="1" required>
 	                </textarea>
 	            </label>
 	        </ion-footer-bar>

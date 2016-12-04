@@ -4,8 +4,7 @@ app.controller('encripCtrl',
   function
     (
       $scope, 
-      $stateParams, 
-      $ionicModal, 
+      $stateParams,
       router, 
       wirings, 
       wiringsReflec, 
@@ -39,16 +38,14 @@ app.controller('encripCtrl',
 
   //Instanciamos a un objeto reflector
   //router(registro a usar)
-  var reflector = new reflector(wiringsReflec[0]);
+  var reflector = new reflector(wiringsReflec);
 
   //main
   $scope.read = function(){
     var message = $scope.data.message
     var messageOutput="";
 
-    //Colocando las letras en Mayuscula
-    message =message.toUpperCase();
-
+    //encrypt
     for (var i = 0; i < message.length; i++) {
       messageOutput = messageOutput.concat(encryptLetter(message[i]));
     }
@@ -62,8 +59,7 @@ app.controller('encripCtrl',
     var message = $scope.data.message;
     var messageOutput;
 
-    //Colocando las letras en Mayuscula
-    message =message.toUpperCase();
+    //encrypt
     messageOutput = encryptLetter(message);
     
     $scope.data.messageOutput= $scope.data.messageOutput.concat(messageOutput);
@@ -120,14 +116,6 @@ app.controller('encripCtrl',
 
     return letter;
   }
-
-  //Modal Preferencias
-  $ionicModal.fromTemplateUrl('templates/preferencias-modal.html', {
-    scope: $scope,
-    animation: 'slide-in-up'
-  }).then(function(modal) {
-    $scope.modal = modal;
-  });
 
   $scope.copy = function(){
     $cordovaClipboard.copy($scope.data.messageOutput)

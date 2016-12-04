@@ -79,3 +79,20 @@ select {
   background: transparent;
   color: #66849D;
 }
+
+/*icon equal preferences*/
+
+.equal{
+  margin-left:10px;
+  margin-right: 10px; 
+}
+
+
+/*Title routers*/
+.routers{
+  margin-right: 15px;
+}
+
+p{
+  text-align: center;
+}

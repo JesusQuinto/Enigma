@@ -26,6 +26,16 @@ app.config(function($stateProvider, $urlRouterProvider) {
         }
       }
     })
+    .state('tab.preferences', {
+      cache: false,
+      url: "preferences",
+      views:{
+        "inicio":{
+          templateUrl: "templates/preferencias.html",
+          controller: "preferencesCtrl"
+        }
+      }
+    })
     .state('tab.guia', {
       cache: false,
       url: "guia",
