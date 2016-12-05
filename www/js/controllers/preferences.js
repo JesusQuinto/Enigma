@@ -2,18 +2,18 @@
 
 app.controller('preferencesCtrl', function ($scope, $rootScope, plugboard, wirings,router) {
 	
-
+  //Si el plugboard no esta definido se crea
   if(!$rootScope.plugboard) $rootScope.plugboard = new plugboard();
 
 	$scope.data = {
    'plugboard': $rootScope.plugboard.registry,
    'wirings':wirings,
    'abc':[
-    'A','B','C','D','E','F',
-    'G','H','I','J','K','L',
-    'M','N','O','P','Q','R',
-    'S','T','U','V','W','X',
-    'Y','Z'
+      'A','B','C','D','E','F',
+      'G','H','I','J','K','L',
+      'M','N','O','P','Q','R',
+      'S','T','U','V','W','X',
+      'Y','Z'
     ],
     'regSelect': $rootScope.regSelect ? $rootScope.regSelect : ['0','1','2']
   };
@@ -28,10 +28,6 @@ app.controller('preferencesCtrl', function ($scope, $rootScope, plugboard, wirin
     ];
   }
 
-  console.log($rootScope.plugboard);
-  
-
-  
   $scope.change = function(){
     //Instanciamos a los objetos router
     //router(registro a usar)
@@ -53,8 +49,10 @@ app.controller('preferencesCtrl', function ($scope, $rootScope, plugboard, wirin
 
       //Limpia todos los campos que ya tengan la letra asignada a $scope.data.plugboard[number]
       for(var i = $scope.data.plugboard.length-1; i--;){
-        if ($scope.data.plugboard[i] === $scope.data.plugboard[number] && i!==number) $scope.data.plugboard[i]="";
-        if ($scope.data.plugboard[i] === $scope.data.plugboard[change] && i!==change ) $scope.data.plugboard[i]="";
+        if ($scope.data.plugboard[i] === $scope.data.plugboard[number] && i!==number) 
+          $scope.data.plugboard[i]="";
+        if ($scope.data.plugboard[i] === $scope.data.plugboard[change] && i!==change ) 
+          $scope.data.plugboard[i]="";
       }
 		}
   }

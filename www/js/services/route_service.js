@@ -7,10 +7,28 @@ app.factory('router', function () {
       this.regSelect=angular.copy(regSelect);
       this.regInput= angular.copy(regSelect);
       this.jsonOut={};
-      this.abc=['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
-      this.abcStatic= ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
       this.position=0;
       this.signalOut=false;
+
+      this.abc=[
+        'A','B','C','D',
+        'E','F','G','H',
+        'I','J','K','L',
+        'M','N','O','P',
+        'Q','R','S','T',
+        'U','V','W','X',
+        'Y','Z'
+      ];
+
+      this.abcStatic=[
+        'A','B','C','D',
+        'E','F','G','H',
+        'I','J','K','L',
+        'M','N','O','P',
+        'Q','R','S','T',
+        'U','V','W','X',
+        'Y','Z'
+      ];
 
       //Colocamos el router en la posicion definida por el usuario
       for (var i = 0; i < this.position; i++) {
@@ -74,15 +92,17 @@ app.factory('router', function () {
       //Objento de retorno
       this.jsonOut = {
 
-          abcCurrent : this.abc, //Contiene la posicion actual del abecedario
+        /*        
           regCurrent : this.regInput, //Contiene la posicion actual del registro de entrada
           position:this.position, //Contiene el Numero actual de la Posicion
           abcInput: this.abc[inputNumber], //Representa la Variable de entrada dentro del router
           abcStatic:this.abcStatic, //Abecedario estatico del sistema
-          signalOut: this.signalOut, //Senal que le indica al siguiente router si iterar o no
           input: input, //Contiene la letra de entrada
           encrypt: encrypt, //Variable encriptada dentro del router
-          out: out //Contiene la letra de salida
+        */
+        abcCurrent : this.abc, //Contiene la posicion actual del abecedario
+        signalOut: this.signalOut, //Senal que le indica al siguiente router si iterar o no
+        out: out //Contiene la letra de salida
       };
 
       //Retorno
@@ -113,6 +133,7 @@ app.factory('router', function () {
           /*  ---JSON.stringify()---
               The JSON.stringify() method converts a JavaScript value to a JSON string
           */
+        /*      
           abcCurrent : this.abc, //Contiene la posicion actual del abecedario
           regCurrent : this.regInput, //Contiene la posicion actual del registro de entrada
           position: this.position, //Contiene el Numero actual de la Posicion
@@ -120,8 +141,9 @@ app.factory('router', function () {
           abcStatic:this.abcStatic, //Abecedario estatico del sistema
           input: input, //Contiene la letra de entrada
           encrypt: encrypt, //Variable encriptada dentro del router
-          out: out //Contiene la letra de salida
-      };
+        */
+        out: out //Contiene la letra de salida
+      }
 
       //Retorno
       return this.jsonOut;
@@ -129,9 +151,18 @@ app.factory('router', function () {
 
 
   router.prototype.restart = function() {
-    this.abc=['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
     this.regInput= angular.copy(this.regSelect);  
     this.position= 0;
+
+    this.abc=[
+      'A','B','C','D',
+      'E','F','G','H',
+      'I','J','K','L',
+      'M','N','O','P',
+      'Q','R','S','T',
+      'U','V','W','X',
+      'Y','Z'
+    ];
 
     return this.abc[0];
   };
@@ -144,9 +175,18 @@ app.factory('router', function () {
    
     // convierte la entrada  "A" -> 0, "B" -> 1, ... "Z" -> 25
     this.position = angular.copy(newposition.charCodeAt() - "A".charCodeAt());
-    this.abc=['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
     this.regInput= angular.copy(this.regSelect); 
-    
+
+    this.abc=[
+      'A','B','C','D',
+      'E','F','G','H',
+      'I','J','K','L',
+      'M','N','O','P',
+      'Q','R','S','T',
+      'U','V','W','X',
+      'Y','Z'
+    ];
+  
     //Colocamos el router en la posicion definida por el usuario
     for (var i = 0; i < this.position; i++) {
       this.abc.push(this.abc.shift());

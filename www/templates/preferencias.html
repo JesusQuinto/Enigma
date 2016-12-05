@@ -27,7 +27,6 @@
 				  	<div class="col col-33">
 				  		<p> 1) Router</p>
 					 	<label class="item item-input">
-					 		<label>Seleccion:</label>
 					 		<select ng-model="data.regSelect[0]" ng-change="change()">
 					 			<option ng-repeat="x in data.wirings" ng-value="$index">Nro:{{$index + 1}}</option>
 							</select>
@@ -36,7 +35,6 @@
   				  	<div class="col col-33">
 				  		<p> 2) Router</p>
 					 	<label class="item item-input">
-					 	<label>Seleccion:</label>
 					 		<select ng-model="data.regSelect[1]" ng-change="change()">
 					 			<option ng-repeat="x in data.wirings" ng-value="$index">Nro:{{$index + 1}}</option>
 							</select>
@@ -45,7 +43,6 @@
   				  	<div class="col col-33">
 				  		<p> 3) Router</p>
 					 	<label class="item item-input">
-					 	<label>Seleccion:</label>
 					 		<select ng-model="data.regSelect[2]" ng-change="change()">
 					 			<option ng-repeat="x in data.wirings" ng-value="$index">Nro:{{$index + 1}}</option>
 							</select>
@@ -75,10 +72,8 @@
 					 	</label>
 				  	</div>
 				</div>
-
 			</div>
 		</div>
-
 		<div class="card">
 	   	 	<div class="item item-divider">
 	   	 		<label>Plugboard</label>
@@ -89,14 +84,14 @@
 					 	<label class="item item-input">
 					 		<label>A</label>
 					    	<i class="icon ion-arrow-swap placeholder-icon equal"></i> 
-					    	<input type="text" ng-model="data.plugboard[0]" ng-change="modify(0)" only-alpha capitalize>
+					    	<input type="text" ng-model="data.plugboard[0]" ng-change="modify(0)" limit-to="1" only-alpha capitalize>
 					  	</label>
 				  	</div>
   				  	<div class="col col-50">
 					 	<label class="item item-input">
 					 		<label>B</label>
 					    	<i class="icon ion-arrow-swap placeholder-icon equal"></i>
-					    	<input type="text" ng-model="data.plugboard[1]" ng-change="modify(1)" only-alpha capitalize>
+					    	<input type="text" ng-model="data.plugboard[1]" ng-change="modify(1)" limit-to="1" only-alpha capitalize>
 					  	</label>
 				  	</div>
 				</div>
@@ -105,14 +100,14 @@
 					 	<label class="item item-input">
 					 		<label>C</label>
 					    	<i class="icon ion-arrow-swap placeholder-icon equal"></i> 
-					    	<input type="text" ng-model="data.plugboard[2]" ng-change="modify(2)" only-alpha capitalize>
+					    	<input type="text" ng-model="data.plugboard[2]" ng-change="modify(2)" limit-to="1" only-alpha capitalize>
 					  	</label>
 				  	</div>
   				  	<div class="col col-50">
 					 	<label class="item item-input">
 					 		<label>D</label>
 					    	<i class="icon ion-arrow-swap placeholder-icon equal"></i>
-					    	<input type="text" ng-model="data.plugboard[3]" ng-change="modify(3)" only-alpha capitalize>
+					    	<input type="text" ng-model="data.plugboard[3]" ng-change="modify(3)" limit-to="1" only-alpha capitalize>
 					  	</label>
 				  	</div>
 				</div>
@@ -121,14 +116,14 @@
 					 	<label class="item item-input">
 					 		<label>E</label>
 					    	<i class="icon ion-arrow-swap placeholder-icon equal"></i> 
-					    	<input type="text" ng-model="data.plugboard[4]" ng-change="modify(4)" only-alpha capitalize>
+					    	<input type="text" ng-model="data.plugboard[4]" ng-change="modify(4)" limit-to="1" only-alpha capitalize>
 					  	</label>
 				  	</div>
   				  	<div class="col col-50">
 					 	<label class="item item-input">
 					 		<label>F</label>
 					    	<i class="icon ion-arrow-swap placeholder-icon equal"></i>
-					    	<input type="text" ng-model="data.plugboard[5]" ng-change="modify(5)" only-alpha capitalize>
+					    	<input type="text" ng-model="data.plugboard[5]" ng-change="modify(5)" limit-to="1" only-alpha capitalize>
 					  	</label>
 				  	</div>
 				</div>
@@ -137,14 +132,14 @@
 					 	<label class="item item-input">
 					 		<label>G</label>
 					    	<i class="icon ion-arrow-swap placeholder-icon equal"></i> 
-					    	<input type="text" ng-model="data.plugboard[6]" ng-change="modify(6)" only-alpha capitalize>
+					    	<input type="text" ng-model="data.plugboard[6]" ng-change="modify(6)" limit-to="1" only-alpha capitalize>
 					  	</label>
 				  	</div>
   				  	<div class="col col-50">
 					 	<label class="item item-input">
 					 		<label>H</label>
 					    	<i class="icon ion-arrow-swap placeholder-icon equal"></i>
-					    	<input type="text" ng-model="data.plugboard[7]" ng-change="modify(7)" only-alpha capitalize>
+					    	<input type="text" ng-model="data.plugboard[7]" ng-change="modify(7)" limit-to="1" only-alpha capitalize>
 					  	</label>
 				  	</div>
 				</div>
@@ -153,14 +148,14 @@
 					 	<label class="item item-input">
 					 		<label>I</label>
 					    	<i class="icon ion-arrow-swap placeholder-icon equal"></i> 
-					    	<input type="text" ng-model="data.plugboard[8]" ng-change="modify(8)" only-alpha capitalize>
+					    	<input type="text" ng-model="data.plugboard[8]" ng-change="modify(8)" limit-to="1" only-alpha capitalize>
 					  	</label>
 				  	</div>
   				  	<div class="col col-50">
 					 	<label class="item item-input">
 					 		<label>J</label>
 					    	<i class="icon ion-arrow-swap placeholder-icon equal"></i>
-					    	<input type="text" ng-model="data.plugboard[9]" ng-change="modify(9)" only-alpha capitalize>
+					    	<input type="text" ng-model="data.plugboard[9]" ng-change="modify(9)" limit-to="1" only-alpha capitalize>
 					  	</label>
 				  	</div>
 				</div>
@@ -169,14 +164,14 @@
 					 	<label class="item item-input">
 					 		<label>K</label>
 					    	<i class="icon ion-arrow-swap placeholder-icon equal"></i> 
-					    	<input type="text" ng-model="data.plugboard[10]" ng-change="modify(10)" only-alpha capitalize>
+					    	<input type="text" ng-model="data.plugboard[10]" ng-change="modify(10)" limit-to="1" only-alpha capitalize>
 					  	</label>
 				  	</div>
   				  	<div class="col col-50">
 					 	<label class="item item-input">
 					 		<label>L</label>
 					    	<i class="icon ion-arrow-swap placeholder-icon equal"></i>
-					    	<input type="text" ng-model="data.plugboard[11]" ng-change="modify(11)" only-alpha capitalize>
+					    	<input type="text" ng-model="data.plugboard[11]" ng-change="modify(11)" limit-to="1" only-alpha capitalize>
 					  	</label>
 				  	</div>
 				</div>
@@ -185,14 +180,14 @@
 					 	<label class="item item-input">
 					 		<label>M</label>
 					    	<i class="icon ion-arrow-swap placeholder-icon equal"></i> 
-					    	<input type="text" ng-model="data.plugboard[12]" ng-change="modify(12)" only-alpha capitalize>
+					    	<input type="text" ng-model="data.plugboard[12]" ng-change="modify(12)" limit-to="1" only-alpha capitalize>
 					  	</label>
 				  	</div>
   				  	<div class="col col-50">
 					 	<label class="item item-input">
 					 		<label>N</label>
 					    	<i class="icon ion-arrow-swap placeholder-icon equal"></i>
-					    	<input type="text" ng-model="data.plugboard[13]" ng-change="modify(13)" only-alpha capitalize>
+					    	<input type="text" ng-model="data.plugboard[13]" ng-change="modify(13)" limit-to="1" only-alpha capitalize>
 					  	</label>
 				  	</div>
 				</div>
@@ -201,14 +196,14 @@
 					 	<label class="item item-input">
 					 		<label>O</label>
 					    	<i class="icon ion-arrow-swap placeholder-icon equal"></i> 
-					    	<input type="text" ng-model="data.plugboard[14]" ng-change="modify(14)" only-alpha capitalize>
+					    	<input type="text" ng-model="data.plugboard[14]" ng-change="modify(14)" limit-to="1" only-alpha capitalize>
 					  	</label>
 				  	</div>
   				  	<div class="col col-50">
 					 	<label class="item item-input">
 					 		<label>P</label>
 					    	<i class="icon ion-arrow-swap placeholder-icon equal"></i>
-					    	<input type="text" ng-model="data.plugboard[15]" ng-change="modify(15)" only-alpha capitalize>
+					    	<input type="text" ng-model="data.plugboard[15]" ng-change="modify(15)" limit-to="1" only-alpha capitalize>
 					  	</label>
 				  	</div>
 				</div>
@@ -217,14 +212,14 @@
 					 	<label class="item item-input">
 					 		<label>Q</label>
 					    	<i class="icon ion-arrow-swap placeholder-icon equal"></i> 
-					    	<input type="text" ng-model="data.plugboard[16]" ng-change="modify(16)" only-alpha capitalize>
+					    	<input type="text" ng-model="data.plugboard[16]" ng-change="modify(16)" limit-to="1" only-alpha capitalize>
 					  	</label>
 				  	</div>
   				  	<div class="col col-50">
 					 	<label class="item item-input">
 					 		<label>R</label>
 					    	<i class="icon ion-arrow-swap placeholder-icon equal"></i>
-					    	<input type="text" ng-model="data.plugboard[17]" ng-change="modify(17)" only-alpha capitalize>
+					    	<input type="text" ng-model="data.plugboard[17]" ng-change="modify(17)" limit-to="1" only-alpha capitalize>
 					  	</label>
 				  	</div>
 				</div>
@@ -233,14 +228,14 @@
 					 	<label class="item item-input">
 					 		<label>S</label>
 					    	<i class="icon ion-arrow-swap placeholder-icon equal"></i> 
-					    	<input type="text" ng-model="data.plugboard[18]" ng-change="modify(18)" only-alpha capitalize>
+					    	<input type="text" ng-model="data.plugboard[18]" ng-change="modify(18)" limit-to="1" only-alpha capitalize>
 					  	</label>
 				  	</div>
   				  	<div class="col col-50">
 					 	<label class="item item-input">
 					 		<label>T</label>
 					    	<i class="icon ion-arrow-swap placeholder-icon equal"></i>
-					    	<input type="text" ng-model="data.plugboard[19]" ng-change="modify(19)" only-alpha capitalize>
+					    	<input type="text" ng-model="data.plugboard[19]" ng-change="modify(19)" limit-to="1" only-alpha capitalize>
 					  	</label>
 				  	</div>
 				</div>
@@ -249,14 +244,14 @@
 					 	<label class="item item-input">
 					 		<label>U</label>
 					    	<i class="icon ion-arrow-swap placeholder-icon equal"></i> 
-					    	<input type="text" ng-model="data.plugboard[20]" ng-change="modify(20)" only-alpha capitalize>
+					    	<input type="text" ng-model="data.plugboard[20]" ng-change="modify(20)" limit-to="1" only-alpha capitalize>
 					  	</label>
 				  	</div>
   				  	<div class="col col-50">
 					 	<label class="item item-input">
 					 		<label>V</label>
 					    	<i class="icon ion-arrow-swap placeholder-icon equal"></i>
-					    	<input type="text" ng-model="data.plugboard[21]" ng-change="modify(21)" only-alpha capitalize>
+					    	<input type="text" ng-model="data.plugboard[21]" ng-change="modify(21)" limit-to="1" only-alpha capitalize>
 					  	</label>
 				  	</div>
 				</div>
@@ -265,14 +260,14 @@
 					 	<label class="item item-input">
 					 		<label>W</label>
 					    	<i class="icon ion-arrow-swap placeholder-icon equal"></i> 
-					    	<input type="text" ng-model="data.plugboard[22]" ng-change="modify(22)" only-alpha capitalize>
+					    	<input type="text" ng-model="data.plugboard[22]" ng-change="modify(22)" limit-to="1" only-alpha capitalize>
 					  	</label>
 				  	</div>
   				  	<div class="col col-50">
 					 	<label class="item item-input">
 					 		<label>X</label>
 					    	<i class="icon ion-arrow-swap placeholder-icon equal"></i>
-					    	<input type="text" ng-model="data.plugboard[23]" ng-change="modify(23)" only-alpha capitalize>
+					    	<input type="text" ng-model="data.plugboard[23]" ng-change="modify(23)" limit-to="1" only-alpha capitalize>
 					  	</label>
 				  	</div>
 				</div>
@@ -281,14 +276,14 @@
 					 	<label class="item item-input">
 					 		<label>Y</label>
 					    	<i class="icon ion-arrow-swap placeholder-icon equal"></i> 
-					    	<input type="text" ng-model="data.plugboard[24]" ng-change="modify(24)" only-alpha capitalize>
+					    	<input type="text" ng-model="data.plugboard[24]" ng-change="modify(24)" limit-to="1" only-alpha capitalize>
 					  	</label>
 				  	</div>
   				  	<div class="col col-50">
 					 	<label class="item item-input">
 					 		<label>Z</label>
 					    	<i class="icon ion-arrow-swap placeholder-icon equal"></i>
-					    	<input type="text" ng-model="data.plugboard[25]" ng-change="modify(25)" only-alpha capitalize>
+					    	<input type="text" ng-model="data.plugboard[25]" ng-change="modify(25)" limit-to="1" only-alpha capitalize>
 					  	</label>
 				  	</div>
 				</div>

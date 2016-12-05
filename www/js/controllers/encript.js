@@ -17,14 +17,21 @@ app.controller('encripCtrl',
     ) 
   {
 
+  //Si el plugboard no esta definido se crea
   if(!$rootScope.plugboard) $rootScope.plugboard = new plugboard();
-
+  console.log($rootScope.plugboard)
   //Definicion de los data-binding usados
   $scope.data = {
     'quick':$stateParams.quick,
     'message' : '',
     'messageOutput':'',
-    'abc': ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'],
+    'abc': [
+      'A','B','C','D','E','F',
+      'G','H','I','J','K','L',
+      'M','N','O','P','Q','R',
+      'S','T','U','V','W','X',
+      'Y','Z'
+    ],
     'routers': [
       {'position':'A'},
       {'position':'A'},
@@ -43,9 +50,6 @@ app.controller('encripCtrl',
       {'obj':new router(wirings[2])}
     ];
   }
-
-  console.log($rootScope.plugboard);
-
 
   //Instanciamos a un objeto reflector
   //router(registro a usar)
@@ -78,15 +82,15 @@ app.controller('encripCtrl',
   }
 
   function encryptLetter(letter) {
-    letter = plugboard(letter);
+    letter = trasfPlugboard(letter);
     letter = inside(letter);
     letter = reflector.transf(letter);
     letter = outside(letter);
-    letter = plugboard(letter);
+    letter = trasfPlugboard(letter);
     return letter;
   }
 
-  function plugboard(letter){
+  function trasfPlugboard(letter){
     /*letter = $rootScope.plugboard.transf(letter);*/
     return letter;
   }
