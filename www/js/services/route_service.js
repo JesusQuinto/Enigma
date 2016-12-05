@@ -3,13 +3,13 @@
 app.factory('router', function () {
    //Declaracion de la clase router  
   //router(registro seleccionado, numero de router, posicion inicial del contador)
-  function router(regSelect,position){
+  function router(regSelect){
       this.regSelect=angular.copy(regSelect);
       this.regInput= angular.copy(regSelect);
       this.jsonOut={};
       this.abc=['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
       this.abcStatic= ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
-      this.position=angular.copy(position);
+      this.position=0;
       this.signalOut=false;
 
       //Colocamos el router en la posicion definida por el usuario

@@ -1,5 +1,6 @@
 <ion-view view-title="Preferencias">
 	<ion-content>
+		<!-- 
 		<div class="card">
 	   	 	<div class="item item-divider">
 	   	 		<label>Reflectors</label>
@@ -13,13 +14,12 @@
 				</p>
 			</div>
 		</div>
-
+ 		-->
 		<div class="card">
 	   	 	<div class="item item-divider">
 	   	 		<label>Routers</label>
 			</div>
 			<div class="item item-text-wrap">
-
 				<p>
 					Seleccione la Combinacion de Routers que desee!
 				</p>
@@ -27,6 +27,7 @@
 				  	<div class="col col-33">
 				  		<p> 1) Router</p>
 					 	<label class="item item-input">
+					 		<label>Seleccion:</label>
 					 		<select ng-model="data.regSelect[0]" ng-change="change()">
 					 			<option ng-repeat="x in data.wirings" ng-value="$index">Nro:{{$index + 1}}</option>
 							</select>
@@ -35,6 +36,7 @@
   				  	<div class="col col-33">
 				  		<p> 2) Router</p>
 					 	<label class="item item-input">
+					 	<label>Seleccion:</label>
 					 		<select ng-model="data.regSelect[1]" ng-change="change()">
 					 			<option ng-repeat="x in data.wirings" ng-value="$index">Nro:{{$index + 1}}</option>
 							</select>
@@ -43,6 +45,7 @@
   				  	<div class="col col-33">
 				  		<p> 3) Router</p>
 					 	<label class="item item-input">
+					 	<label>Seleccion:</label>
 					 		<select ng-model="data.regSelect[2]" ng-change="change()">
 					 			<option ng-repeat="x in data.wirings" ng-value="$index">Nro:{{$index + 1}}</option>
 							</select>

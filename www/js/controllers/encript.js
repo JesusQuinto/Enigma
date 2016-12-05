@@ -4,16 +4,20 @@ app.controller('encripCtrl',
   function
     (
       $scope, 
+      $rootScope,
       $stateParams,
       router, 
       wirings, 
       wiringsReflec, 
-      reflector, 
+      reflector,
+      plugboard, 
       $cordovaClipboard, 
       $cordovaToast, 
       $cordovaSocialSharing
     ) 
   {
+
+  if(!$rootScope.plugboard) $rootScope.plugboard = new plugboard();
 
   //Definicion de los data-binding usados
   $scope.data = {
@@ -30,11 +34,18 @@ app.controller('encripCtrl',
 
   //Instanciamos a los objetos router
   //router(registro a usar, la posicion de partida)
-  var router = [
-    {'obj':new router(wirings[1],0)},
-    {'obj':new router(wirings[2],0)},
-    {'obj':new router(wirings[3],0)}
-  ];
+ if(!$rootScope.router){
+    //Instanciamos a los objetos router
+    //router(registro a usar)
+    $rootScope.router = [
+      {'obj':new router(wirings[0])},
+      {'obj':new router(wirings[1])},
+      {'obj':new router(wirings[2])}
+    ];
+  }
+
+  console.log($rootScope.plugboard);
+
 
   //Instanciamos a un objeto reflector
   //router(registro a usar)
@@ -67,9 +78,16 @@ app.controller('encripCtrl',
   }
 
   function encryptLetter(letter) {
+    letter = plugboard(letter);
     letter = inside(letter);
     letter = reflector.transf(letter);
     letter = outside(letter);
+    letter = plugboard(letter);
+    return letter;
+  }
+
+  function plugboard(letter){
+    /*letter = $rootScope.plugboard.transf(letter);*/
     return letter;
   }
 
@@ -80,19 +98,19 @@ app.controller('encripCtrl',
     var objectInside3;
 
     //------------------  router 1 ------------------------
-    objectInside1 = router[0].obj.encryptInside(letter,true);
+    objectInside1 = $rootScope.router[0].obj.encryptInside(letter,true);
     $scope.data.routers[0].position = objectInside1.abcCurrent[0];
     letter = objectInside1.out;
     signal = objectInside1.signalOut;
     
     //------------------  router 2 ------------------------
-    objectInside2 = router[1].obj.encryptInside(letter,signal);
+    objectInside2 = $rootScope.router[1].obj.encryptInside(letter,signal);
     $scope.data.routers[1].position = objectInside2.abcCurrent[0];
     letter = objectInside2.out;
     signal = objectInside2.signalOut;
     
     //------------------  router 3 ------------------------
-    objectInside3 = router[2].obj.encryptInside(letter,signal);
+    objectInside3 = $rootScope.router[2].obj.encryptInside(letter,signal);
     $scope.data.routers[2].position = objectInside3.abcCurrent[0];
     letter = objectInside3.out;
 
@@ -105,13 +123,13 @@ app.controller('encripCtrl',
     var objectOutside3;
 
     //------------------  router 3 ------------------------
-    objectOutside3 = router[2].obj.encryptOutside(letter);
+    objectOutside3 = $rootScope.router[2].obj.encryptOutside(letter);
     letter = objectOutside3.out;
     //------------------  router 2 ------------------------
-    objectOutside2 = router[1].obj.encryptOutside(letter);
+    objectOutside2 = $rootScope.router[1].obj.encryptOutside(letter);
     letter = objectOutside2.out;    
     //------------------  router 1 ------------------------
-    objectOutside1 = router[0].obj.encryptOutside(letter);
+    objectOutside1 = $rootScope.router[0].obj.encryptOutside(letter);
     letter = objectOutside1.out;
 
     return letter;
@@ -147,13 +165,13 @@ app.controller('encripCtrl',
   }
 
   $scope.restartRouters = function(){
-    $scope.data.routers[0].position = router[0].obj.restart();
-    $scope.data.routers[1].position = router[1].obj.restart();
-    $scope.data.routers[2].position = router[2].obj.restart();
+    $scope.data.routers[0].position = $rootScope.router[0].obj.restart();
+    $scope.data.routers[1].position = $rootScope.router[1].obj.restart();
+    $scope.data.routers[2].position = $rootScope.router[2].obj.restart();
   }
 
   $scope.moveRouter = function(routerSelect,newPosition) {
-    $scope.data.routers[routerSelect].position = router[routerSelect].obj.move(newPosition);
+    $scope.data.routers[routerSelect].position = $rootScope.router[routerSelect].obj.move(newPosition);
   }
 
 });

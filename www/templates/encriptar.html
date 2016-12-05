@@ -37,7 +37,9 @@
 			    	<i class="icon ion-android-share-alt"></i>
 			    </button>
 			</div>
-			<div class="item item-text-wrap output" ng-bind="data.messageOutput"></div>
+			<div class="item item-text-wrap output">
+				<p ng-bind="data.messageOutput"></p>
+			</div>
 		</div>
 		<div ng-if="data.quick == 'true'">
 			<form name="encryptForm" ng-submit="read()" novalidate>
