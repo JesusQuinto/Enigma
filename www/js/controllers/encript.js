@@ -4,24 +4,37 @@ app.controller('encripCtrl',
   function
     (
       $scope, 
-      $rootScope,
       $stateParams,
+      $cordovaClipboard, 
+      $cordovaToast, 
+      $cordovaSocialSharing,
+      $ionicModal,
       router, 
       wirings, 
       wiringsReflec, 
       reflector,
-      plugboard, 
-      $cordovaClipboard, 
-      $cordovaToast, 
-      $cordovaSocialSharing
+      plugboard
     ) 
   {
 
-  //Si el plugboard no esta definido se crea
-  if(!$rootScope.plugboard) $rootScope.plugboard = new plugboard();
-  console.log($rootScope.plugboard)
+  //Instanciamos el plugboard
+  var plugboard = new plugboard();
+
+  //Instanciamos a un objeto reflector
+  var reflector = new reflector(wiringsReflec);
+
+  //Instanciamos a los objetos router
+  //router(registro a usar)
+  var router = [
+    {'obj':new router(wirings[0])},
+    {'obj':new router(wirings[1])},
+    {'obj':new router(wirings[2])}
+  ];
+
   //Definicion de los data-binding usados
   $scope.data = {
+    'plugboard': plugboard.registry,
+    'wirings':wirings,
     'quick':$stateParams.quick,
     'message' : '',
     'messageOutput':'',
@@ -36,24 +49,9 @@ app.controller('encripCtrl',
       {'position':'A'},
       {'position':'A'},
       {'position':'A'}
-    ]
+    ],
+    'regSelect': ['0','1','2']
   };
-
-  //Instanciamos a los objetos router
-  //router(registro a usar, la posicion de partida)
- if(!$rootScope.router){
-    //Instanciamos a los objetos router
-    //router(registro a usar)
-    $rootScope.router = [
-      {'obj':new router(wirings[0])},
-      {'obj':new router(wirings[1])},
-      {'obj':new router(wirings[2])}
-    ];
-  }
-
-  //Instanciamos a un objeto reflector
-  //router(registro a usar)
-  var reflector = new reflector(wiringsReflec);
 
   //main
   $scope.read = function(){
@@ -61,9 +59,8 @@ app.controller('encripCtrl',
     var messageOutput="";
 
     //encrypt
-    for (var i = 0; i < message.length; i++) {
+    for (var i = 0; i < message.length; i++)
       messageOutput = messageOutput.concat(encryptLetter(message[i]));
-    }
 
     $scope.data.messageOutput= angular.copy(messageOutput);
     $scope.data.message = "";
@@ -82,16 +79,11 @@ app.controller('encripCtrl',
   }
 
   function encryptLetter(letter) {
-    letter = trasfPlugboard(letter);
+    letter = plugboard.transf(letter);
     letter = inside(letter);
     letter = reflector.transf(letter);
     letter = outside(letter);
-    letter = trasfPlugboard(letter);
-    return letter;
-  }
-
-  function trasfPlugboard(letter){
-    /*letter = $rootScope.plugboard.transf(letter);*/
+    letter = plugboard.transf(letter);
     return letter;
   }
 
@@ -101,20 +93,18 @@ app.controller('encripCtrl',
     var objectInside2;
     var objectInside3;
 
-    //------------------  router 1 ------------------------
-    objectInside1 = $rootScope.router[0].obj.encryptInside(letter,true);
+    //router 1 
+    objectInside1 = router[0].obj.encryptInside(letter,true);
     $scope.data.routers[0].position = objectInside1.abcCurrent[0];
     letter = objectInside1.out;
     signal = objectInside1.signalOut;
-    
-    //------------------  router 2 ------------------------
-    objectInside2 = $rootScope.router[1].obj.encryptInside(letter,signal);
+    //router 2 
+    objectInside2 = router[1].obj.encryptInside(letter,signal);
     $scope.data.routers[1].position = objectInside2.abcCurrent[0];
     letter = objectInside2.out;
     signal = objectInside2.signalOut;
-    
-    //------------------  router 3 ------------------------
-    objectInside3 = $rootScope.router[2].obj.encryptInside(letter,signal);
+    //router 3 
+    objectInside3 = router[2].obj.encryptInside(letter,signal);
     $scope.data.routers[2].position = objectInside3.abcCurrent[0];
     letter = objectInside3.out;
 
@@ -126,14 +116,14 @@ app.controller('encripCtrl',
     var objectOutside2;
     var objectOutside3;
 
-    //------------------  router 3 ------------------------
-    objectOutside3 = $rootScope.router[2].obj.encryptOutside(letter);
+    //router 3
+    objectOutside3 = router[2].obj.encryptOutside(letter);
     letter = objectOutside3.out;
-    //------------------  router 2 ------------------------
-    objectOutside2 = $rootScope.router[1].obj.encryptOutside(letter);
+    //router 2
+    objectOutside2 = router[1].obj.encryptOutside(letter);
     letter = objectOutside2.out;    
-    //------------------  router 1 ------------------------
-    objectOutside1 = $rootScope.router[0].obj.encryptOutside(letter);
+    //router 1
+    objectOutside1 = router[0].obj.encryptOutside(letter);
     letter = objectOutside1.out;
 
     return letter;
@@ -146,11 +136,7 @@ app.controller('encripCtrl',
       .showShortBottom('Mensaje copiado')
       .then(function(success) {
         // success
-      }, function (error) {
-        // error
       });
-    }, function () {
-      // error
     });
   }
 
@@ -169,13 +155,50 @@ app.controller('encripCtrl',
   }
 
   $scope.restartRouters = function(){
-    $scope.data.routers[0].position = $rootScope.router[0].obj.restart();
-    $scope.data.routers[1].position = $rootScope.router[1].obj.restart();
-    $scope.data.routers[2].position = $rootScope.router[2].obj.restart();
+    $scope.data.routers[0].position = router[0].obj.restart();
+    $scope.data.routers[1].position = router[1].obj.restart();
+    $scope.data.routers[2].position = router[2].obj.restart();
   }
 
   $scope.moveRouter = function(routerSelect,newPosition) {
-    $scope.data.routers[routerSelect].position = $rootScope.router[routerSelect].obj.move(newPosition);
+    $scope.data.routers[routerSelect].position = router[routerSelect].obj.move(newPosition);
   }
 
+  /*Preferences*/
+
+  $ionicModal.fromTemplateUrl('templates/preferences-modal.html', {
+    scope: $scope,
+    animation: 'scale-in'
+  }).then(function(modal) {
+    $scope.modal = modal;
+  });
+
+  $scope.change = function(){
+    //Instanciamos a los objetos router
+    //router(registro a usar)
+    regSelect = $scope.data.regSelect;
+
+    router = [
+      {'obj':new router(wirings[$scope.data.regSelect[0]])},
+      {'obj':new router(wirings[$scope.data.regSelect[1]])},
+      {'obj':new router(wirings[$scope.data.regSelect[2]])}
+    ];
+  }
+
+  $scope.modify = function(number){
+    //transforma un campo undefined en ""
+    if ($scope.data.plugboard[number] == undefined) $scope.data.plugboard[number]="";
+  
+    // convierte la entrada  "A" -> 0, "B" -> 1, ... "Z" -> 25
+    var change = ($scope.data.plugboard[number].charCodeAt() - "A".charCodeAt());
+    $scope.data.plugboard[change] = $scope.data.abc[number];    
+
+    //Limpia todos los campos que ya tengan la letra asignada a $scope.data.plugboard[number]
+    for(var i = $scope.data.plugboard.length-1; i--;){
+      if ($scope.data.plugboard[i] === $scope.data.plugboard[number] && i!==number) 
+        $scope.data.plugboard[i]="";
+      if ($scope.data.plugboard[i] === $scope.data.plugboard[change] && i!==change ) 
+        $scope.data.plugboard[i]="";
+    } 
+  }
 });
