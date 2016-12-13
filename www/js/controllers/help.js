@@ -30,7 +30,7 @@ app.controller('helpCtrl', function ($scope, $cordovaInAppBrowser, $cordovaToast
   	}
 
 	$scope.githubM = function(){
-		$cordovaInAppBrowser.open('https://github.com/github.com/ULAnux/mathematica', '_blank', options)	
+		$cordovaInAppBrowser.open('https://github.com/ULAnux/mathematica', '_blank', options)	
 	    .catch(function(event) {
 	        $cordovaToast.showShortBottom('Pagina no Disponible');
 	    });
