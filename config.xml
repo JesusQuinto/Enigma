@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <widget id="com.ionicframework.enigma785167" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-  <name>enigma</name>
+  <name>Enigma</name>
   <description>
-      Simulation of the Enigma machine used by the Germans in World War II
-    </description>
+    Simulation of the Enigma machine used by the Germans in World War II
+  </description>
   <author email="jesuskinto@gmail.com" href="https://plus.google.com/u/0/117731700218982861600">
-      Jesus Miguel Quinto Teran
-    </author>
+    Jesus Miguel Quinto Teran
+  </author>
   <content src="index.html"/>
   <access origin="*"/>
   <preference name="webviewbounce" value="false"/>

@@ -10,18 +10,15 @@ app.controller('encripCtrl',
       $cordovaSocialSharing,
       $ionicModal,
       router, 
-      wirings, 
-      wiringsReflec, 
       reflector,
-      plugboard
+      plugboard,
+      wirings
     ) 
   {
 
-  //Instanciamos el plugboard
+  //Instanciamos el plugboard y el reflector
   var plugboard = new plugboard();
-
-  //Instanciamos a un objeto reflector
-  var reflector = new reflector(wiringsReflec);
+  var reflector = new reflector();
 
   //Instanciamos a los objetos router
   //router(registro a usar)
@@ -89,65 +86,53 @@ app.controller('encripCtrl',
 
   function inside(letter) {
     var signal;
-    var objectInside1;
-    var objectInside2;
-    var objectInside3;
+    var output;
 
     //router 1 
-    objectInside1 = router[0].obj.encryptInside(letter,true);
-    $scope.data.routers[0].position = objectInside1.abcCurrent[0];
-    letter = objectInside1.out;
-    signal = objectInside1.signalOut;
+    output = router[0].obj.encryptInside(letter,true);
+    $scope.data.routers[0].position = output.abcCurrent[0];
+    letter = output.out;
+    signal = output.signalOut;
     //router 2 
-    objectInside2 = router[1].obj.encryptInside(letter,signal);
-    $scope.data.routers[1].position = objectInside2.abcCurrent[0];
-    letter = objectInside2.out;
-    signal = objectInside2.signalOut;
+    output = router[1].obj.encryptInside(letter,signal);
+    $scope.data.routers[1].position = output.abcCurrent[0];
+    letter = output.out;
+    signal = output.signalOut;
     //router 3 
-    objectInside3 = router[2].obj.encryptInside(letter,signal);
-    $scope.data.routers[2].position = objectInside3.abcCurrent[0];
-    letter = objectInside3.out;
+    output = router[2].obj.encryptInside(letter,signal);
+    $scope.data.routers[2].position = output.abcCurrent[0];
+    letter = output.out;
 
     return letter;
   }
 
   function outside(letter) {
-    var objectOutside1;
-    var objectOutside2;
-    var objectOutside3;
+    var output;
 
     //router 3
-    objectOutside3 = router[2].obj.encryptOutside(letter);
-    letter = objectOutside3.out;
+    output = router[2].obj.encryptOutside(letter);
+    letter = output;
     //router 2
-    objectOutside2 = router[1].obj.encryptOutside(letter);
-    letter = objectOutside2.out;    
+    output = router[1].obj.encryptOutside(letter);
+    letter = output;    
     //router 1
-    objectOutside1 = router[0].obj.encryptOutside(letter);
-    letter = objectOutside1.out;
+    output = router[0].obj.encryptOutside(letter);
+    letter = output;
 
     return letter;
   }
 
   $scope.copy = function(){
     $cordovaClipboard.copy($scope.data.messageOutput)
-    .then(function () {  
+    .then(function (){  
       $cordovaToast
-      .showShortBottom('Mensaje copiado')
-      .then(function(success) {
-        // success
-      });
+      .showShortBottom('Mensaje copiado');
     });
   }
 
   $scope.sharing = function(argument) {
     $cordovaSocialSharing
-    .share($scope.data.messageOutput) // Share via native share sheet
-    .then(function(result) {
-      // Success!
-    }, function(err) {
-      // error
-    });
+    .share($scope.data.messageOutput);
   }
 
   $scope.cleanOutput = function(){
@@ -175,9 +160,6 @@ app.controller('encripCtrl',
 
   $scope.change = function(){
     //Instanciamos a los objetos router
-    //router(registro a usar)
-    regSelect = $scope.data.regSelect;
-
     router = [
       {'obj':new router(wirings[$scope.data.regSelect[0]])},
       {'obj':new router(wirings[$scope.data.regSelect[1]])},
@@ -188,13 +170,13 @@ app.controller('encripCtrl',
   $scope.modify = function(number){
     //transforma un campo undefined en ""
     if ($scope.data.plugboard[number] == undefined) $scope.data.plugboard[number]="";
+    $scope.data.plugboard[number] = $scope.data.plugboard[number].slice(-1);
   
-    // convierte la entrada  "A" -> 0, "B" -> 1, ... "Z" -> 25
     var change = ($scope.data.plugboard[number].charCodeAt() - "A".charCodeAt());
     $scope.data.plugboard[change] = $scope.data.abc[number];    
 
     //Limpia todos los campos que ya tengan la letra asignada a $scope.data.plugboard[number]
-    for(var i = $scope.data.plugboard.length-1; i--;){
+    for(var i = $scope.data.plugboard.length; i--;){
       if ($scope.data.plugboard[i] === $scope.data.plugboard[number] && i!==number) 
         $scope.data.plugboard[i]="";
       if ($scope.data.plugboard[i] === $scope.data.plugboard[change] && i!==change ) 

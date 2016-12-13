@@ -1,8 +1,7 @@
 'use strict';
 
 app.factory('plugboard', function () {
-  //Declaracion de la clase plugboard  
-  //plugboard(registro seleccionado)
+  //Declaracion de la clase plugboard 
   function plugboard(){
     this.registry= [
       'E','K','M','F',
@@ -17,9 +16,7 @@ app.factory('plugboard', function () {
 
   plugboard.prototype.transf = function(letter){
     var letterPosition = (letter.charCodeAt() - "A".charCodeAt());
-    if (this.registry[letterPosition]=="") {
-      return letter;
-    }
+    if (this.registry[letterPosition]=="") return letter;
     else return this.registry[letterPosition];
   }
 

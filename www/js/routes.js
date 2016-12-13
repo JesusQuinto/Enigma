@@ -26,28 +26,13 @@ app.config(function($stateProvider, $urlRouterProvider) {
         }
       }
     })
-    .state('tab.guia', {
+    .state('tab.acerca', {
       cache: false,
-      url: "guia",
+      url: "acerca",
       views:{
-        "guia":{
-          templateUrl: "templates/guia.html"
-        }
-      }
-    })
-    .state('tab.guia-rapida', {
-      url: "guia-rapida",
-        views:{
-          "guia":{
-            templateUrl: "templates/guia-rapida.html"
-        }
-      }
-    })
-    .state('tab.como-funciona', {
-      url: "como-funciona",
-      views:{
-        "guia":{
-          templateUrl: "templates/como-funciona.html"
+        "acerca":{
+          templateUrl: "templates/acerca-de.html",
+          controller: "helpCtrl"
         }
       }
     });
